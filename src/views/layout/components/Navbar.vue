@@ -1,8 +1,8 @@
 <template>
   <div class="navbar">
-    <hamburger :toggle-click="toggleSideBar" :is-active="sidebar.opened" class="hamburger-container"/>
-    <breadcrumb />
-    <el-dropdown class="avatar-container" trigger="click">
+    <!-- <hamburger :toggle-click="toggleSideBar" :is-active="sidebar.opened" class="hamburger-container"/> -->
+    <!-- <breadcrumb /> -->
+    <!-- <el-dropdown class="avatar-container" trigger="click">
       <div class="avatar-wrapper">
         <img :src="avatar+'?imageView2/1/w/80/h/80'" class="user-avatar">
         <i class="el-icon-caret-bottom"/>
@@ -10,14 +10,27 @@
       <el-dropdown-menu slot="dropdown" class="user-dropdown">
         <router-link class="inlineBlock" to="/">
           <el-dropdown-item>
-            Home
+            首页
+          </el-dropdown-item>
+        </router-link>
+        <router-link class="inlineBlock" to="/">
+          <el-dropdown-item>
+            个人中心
           </el-dropdown-item>
         </router-link>
         <el-dropdown-item divided>
-          <span style="display:block;" @click="logout">LogOut</span>
+          <span style="display:block;" @click="logout">退出</span>
         </el-dropdown-item>
       </el-dropdown-menu>
-    </el-dropdown>
+    </el-dropdown> -->
+    <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+      <el-menu-item index="1">首页</el-menu-item>
+      <el-menu-item index="2" >产品</el-menu-item>
+      <el-menu-item index="2" >服务报价</el-menu-item>
+      <el-menu-item index="2" >帮助中心</el-menu-item>
+      <el-menu-item index="2" >联系方式</el-menu-item>
+      <el-button class="login-btn" type="primary" size="big" round>立即登录</el-button>
+    </el-menu>
   </div>
 </template>
 
@@ -30,6 +43,11 @@ export default {
   components: {
     Breadcrumb,
     Hamburger
+  },
+  data() {
+    return {
+      activeIndex: '1'
+    }
   },
   computed: {
     ...mapGetters([
@@ -52,9 +70,14 @@ export default {
 
 <style rel="stylesheet/scss" lang="scss" scoped>
 .navbar {
-  height: 50px;
-  line-height: 50px;
+  position: fixed;
+  width: 100%;
+  height: 70px;
+  padding: 0 20%;
+  line-height: 70px;
+  background-color: #FFFFFF;
   box-shadow: 0 1px 3px 0 rgba(0,0,0,.12), 0 0 3px 0 rgba(0,0,0,.04);
+  z-index: 9999;
   .hamburger-container {
     line-height: 58px;
     height: 50px;
@@ -90,6 +113,27 @@ export default {
       }
     }
   }
+  .login-btn {
+    float: right;
+    margin-left: 50px;
+    margin-top: 6px;
+  }
+}
+</style>
+
+<style lang="scss">
+.el-menu {
+  padding: 15px auto;
+  margin-top: 9px;
+}
+.el-menu--horizontal > .el-menu-item {
+  margin-left: 3%;
+}
+.el-menu.el-menu--horizontal {
+  border-bottom: solid 0px #e6e6e6;
+}
+.el-menu--horizontal > .el-menu-item.is-active {
+  border-bottom: 3px solid #4A9;
 }
 </style>
 
